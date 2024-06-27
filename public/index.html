@@ -1,4 +1,29 @@
 <!DOCTYPE html>
-<html>
-	
+<html lang="en">
+	<head>
+		<title>Plant Identifier</title>
+		<meta charset = "UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="styles.css">
+	</head>
+	<body>
+		<header>
+			<h1>Plant Identifier</h1>
+			<p>Plant identification has never been easier. Upload your image to start learning about the amazing biodiversity near you!</p>
+		</header>
+		<main>
+			<section>
+				<!--enctype multipart/form data allows image uploads-->
+				<form enctype="multipart/form-data" id="uploadForm">
+					<input type="file" id="imageUpload" name="image" accept="image/*" required>
+					<button type="submit">Identify your plant</button>
+				</form>
+			</section>
+			<section id="results-section">
+				<!--Results will be displayed here-->
+				<h2>Identification Results</h2>
+				<div id="result"></div>
+			</section>
+		</main>
+	</body>
 </html>
