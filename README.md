@@ -1,0 +1,3 @@
+# Plant Identifier
+
+While hiking or on a casual walk, I often find myself looking to identify common plants around my area to appreciate the biodiversity. Therefore, I am making a website using HTML, CSS, JavaScript, Node.js, Express.js, and Plant Net's API.
