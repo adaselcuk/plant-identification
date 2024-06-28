@@ -1,0 +1,47 @@
+/*custom fonts downloaded from internet */
+@font-face {
+	font-family: 'Mono';
+	src: url('fonts/3608-mono-web.woff2') format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Picnic';
+	src: url('fonts/PicNic-Regular.woff') format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+/* Setting open sans for body font */
+body {
+	background-color: #fff2e4;
+	font-family: 'Open Sans', sans-serif;
+	margin: 0;
+	padding: 0;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	min-height: 100vh;
+}
+
+/* Setting custom fonts for h1 and description */
+header {
+	text-align: center;
+	padding: 20px;
+	color: black;
+	width: 100%;
+}
+
+header h1 {
+	font-family: 'Picnic', sans-serif;
+	font-size: 70px;
+	font-weight: 400;
+}
+
+header p {
+	font-family: 'Mono', monospace;
+	font-size: 20px;
+	font-weight: 400;
+}u
