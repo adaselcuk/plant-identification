@@ -7,6 +7,13 @@
 }
 
 @font-face {
+	font-family: 'Vercetti';
+	src: url('fonts/Vercetti-Regular.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
 	font-family: 'Picnic';
 	src: url('fonts/PicNic-Regular.woff') format('woff');
 	font-weight: normal;
@@ -41,7 +48,65 @@ header h1 {
 }
 
 header p {
-	font-family: 'Mono', monospace;
+	font-family: 'Vercetti', monospace;
 	font-size: 20px;
 	font-weight: 400;
-}u
+}
+
+/*Main content styling */
+main {
+	display: flex;
+	padding: 20px;
+	width: 100%;
+	max-width: 1200px;
+	flex-direction: column;
+	align-items: center;
+	background-color: #c4dcbb;
+	border-radius: 20px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	margin: 20px 0;
+}
+
+.upload-section, .result-section {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-bottom: 20px;
+}
+
+form {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+input[type="file"] {
+	margin: 20px 0;
+}
+
+button {
+	padding: 10px 20px;
+	background-color: bisque;
+	color: black;
+	border: none;
+	box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+	cursor: pointer;
+	font-size: 16px;
+	font-family: 'Vercetti', sans-serif;
+}
+
+button:hover {
+	background-color: #61934b;
+}
+
+/* Result section styling */
+.result-section {
+	text-align: center;
+}
+
+h2 {
+	font-family: 'Mono', monospace;
+	font-size: 30px;
+	font-weight: 400;
+}
