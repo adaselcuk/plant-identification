@@ -6,6 +6,4 @@ While hiking or on a casual walk, I often find myself looking to identify common
 
 PicNic by Mariel Nils. Distributed by velvetyne.fr.
 
-Mono by Justin Penner.
-
 The FontStruction “Amiga Topaz” by Patrick Lauke
