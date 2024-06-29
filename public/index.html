@@ -17,11 +17,12 @@
 			<section>
 				<!--enctype multipart/form data allows image uploads-->
 				<form enctype="multipart/form-data" id="uploadForm" action="/uploads">
-					<input type="file" id="imageUpload" name="image" accept="image/*" style="display: none;" required>
+					<input type="file" id="imageUpload" name="image" accept="image/*" style="visibility: hidden" required>
 					<label for="imageUpload" id="uploadLabel">Choose a file</label>
 					<br>
-					<button type="submit">Identify your plant</button>
+					<button type="submit" id="submitFile">Identify your plant</button>
 				</form>
+				<p id=""error-message" class="error-message"></p>
 			</section>
 			<section id="results-section">
 				<!--Results will be displayed here-->

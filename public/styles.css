@@ -145,6 +145,19 @@ button:hover {
 	text-align: center;
 }
 
+.error-message {
+	color: #4c1130;
+	margin-top: 10px;
+	padding: 5px;
+}
+
+#errorMessage {
+	color: #4c1130;
+	margin-top: 10px;
+	padding: 5px;
+	border: 1px solid #61934b;
+}
+
 h2 {
 	font-family: 'AmigaTopaz', monospace;
 	font-size: 30px;

@@ -2,9 +2,9 @@
   "name": "plant-identification-app",
   "description": "A simple plant identification app using the PlantNet API",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "server/server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start":"node server/server.js"
   },
   "keywords": [],
   "author": "Ada Selcuk",
