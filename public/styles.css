@@ -7,25 +7,26 @@
 }
 
 @font-face {
-	font-family: 'webfont', sans-serif;
+	font-family: 'Webfont';
 	src: url('fonts/000webfont.ttf') format('truetype');
 	font-weight: normal;
 	font-style: normal;
 }
 
 @font-face {
-	font-family: 'basiic', sans-serif;
+	font-family: 'Basiic';
 	src: url('fonts/basiic.ttf') format('truetype');
 	font-weight: normal;
 	font-style: normal;
 }
 
 @font-face {
-	font-family: 'amiga-topaz', sans-serif;
+	font-family: 'AmigaTopaz';
 	src: url('fonts/amiga-topaz.ttf') format('truetype');
 	font-weight: normal;
 	font-style: normal;
 }
+
 
 @font-face {
 	font-family: 'Vercetti';
@@ -33,6 +34,7 @@
 	font-weight: normal;
 	font-style: normal;
 }
+
 
 @font-face {
 	font-family: 'Picnic';
@@ -44,7 +46,7 @@
 /* Setting open sans for body font */
 body {
 	background-color: #fff2e4;
-	font-family: 'basiic', sans-serif;
+	font-family: 'Basiic';
 	margin: 0;
 	padding: 0;
 	display: flex;
@@ -69,8 +71,8 @@ header h1 {
 }
 
 header p {
-	font-family: 'webfont', monospace;
-	font-size: 20px;
+	font-family: 'Webfont', monospace;
+	font-size: 30px;
 	font-weight: 400;
 }
 
@@ -114,7 +116,7 @@ button {
 	box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
 	cursor: pointer;
 	font-size: 16px;
-	font-family: 'basiic', sans-serif;
+	font-family: 'Basiic', sans-serif;
 }
 
 button:hover {
@@ -127,7 +129,7 @@ button:hover {
 }
 
 h2 {
-	font-family: 'basiic', monospace;
+	font-family: 'Basiic', monospace;
 	font-size: 30px;
 	font-weight: 400;
 }
