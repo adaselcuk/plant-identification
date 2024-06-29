@@ -17,7 +17,9 @@
 			<section>
 				<!--enctype multipart/form data allows image uploads-->
 				<form enctype="multipart/form-data" id="uploadForm">
-					<input type="file" id="imageUpload" name="image" accept="image/*" required>
+					<input type="file" id="imageUpload" name="image" accept="image/*" style="display: none;" required>
+					<label for="imageUpload" id="uploadLabel">Choose a file</label>
+					<br>
 					<button type="submit">Identify your plant</button>
 				</form>
 			</section>

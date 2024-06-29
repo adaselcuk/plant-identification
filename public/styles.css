@@ -71,8 +71,8 @@ header h1 {
 }
 
 header p {
-	font-family: 'Webfont', monospace;
-	font-size: 30px;
+	font-family: 'Basiic', monospace;
+	font-size: 25px;
 	font-weight: 400;
 }
 
@@ -104,8 +104,25 @@ form {
 	align-items: center;
 }
 
+/*
 input[type="file"] {
 	margin: 20px 0;
+}
+*/
+
+#uploadLabel {
+	font-family: 'Basiic', monospace;
+	font-size: 20px;
+	padding: 10px 20px;
+	background-color: bisque;
+	color: black;
+	border: none;
+	box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+	cursor: pointer;
+}
+
+#uploadLabel:hover {
+	background-color: #61934b;
 }
 
 button {
@@ -115,7 +132,7 @@ button {
 	border: none;
 	box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
 	cursor: pointer;
-	font-size: 16px;
+	font-size: 20px;
 	font-family: 'Basiic', sans-serif;
 }
 
@@ -129,7 +146,7 @@ button:hover {
 }
 
 h2 {
-	font-family: 'Basiic', monospace;
+	font-family: 'AmigaTopaz', monospace;
 	font-size: 30px;
 	font-weight: 400;
 }
