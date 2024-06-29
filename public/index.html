@@ -20,9 +20,9 @@
 					<input type="file" id="imageUpload" name="image" accept="image/*" style="visibility: hidden" required>
 					<label for="imageUpload" id="uploadLabel">Choose a file</label>
 					<br>
-					<button type="submit" id="submitFile">Identify your plant</button>
+					<button type="submit" id="submitFile" onclick="return validateFileSelection();">Identify your plant</button>
 				</form>
-				<p id=""error-message" class="error-message"></p>
+				<span id=""error-message" class="error-message"></span>
 			</section>
 			<section id="results-section">
 				<!--Results will be displayed here-->

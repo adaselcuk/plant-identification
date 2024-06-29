@@ -80,10 +80,28 @@ function uploadFile(formData) {
     });
 }
 
+function validateFileSelection() {
+    const fileInput = document.getElementById('imageUpload');
+    const errorMessageElement = document.getElementById('error-message');
+    if (!fileInput.files[0]) {
+        errorMessageElement.textContent = 'No file selected!';
+        return false; // Prevent form submission
+    } else {
+        errorMessageElement.textContent = ''; // Clear previous error message
+        return true; // Allow form submission if needed
+    }
+}
+
 document.getElementById('uploadForm').addEventListener('submit', function(event) {
     event.preventDefault(); // Prevent the form from submitting in the traditional way
-    const formData = new FormData();
-    const fileInput = document.getElementById('fileInput');
+	const isValid = validateFileSelection();
+
+	if (!isValid) {
+		return;
+	}
+
+	const formData = new FormData();
+	const fileInput = document.getElementById('imageUpload');
     if (fileInput.files[0]) {
         formData.append('file', fileInput.files[0]);
         uploadFile(formData);
