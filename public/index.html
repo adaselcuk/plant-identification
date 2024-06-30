@@ -16,11 +16,11 @@
 		<main>
 			<section>
 				<!--enctype multipart/form data allows image uploads-->
-				<form enctype="multipart/form-data" id="uploadForm" method="POST" onclick="return noFile()">
+				<form enctype="multipart/form-data" id="uploadForm" method="POST" >
 					<input type="file" id="imageUpload" name="image" accept="image/*" required>
 					<label for="imageUpload" id="uploadLabel">Choose a file</label>
 					<br>
-					<button type="submit" id="submitFile">Identify your plant</button>
+					<button type="submit" id="submitFile" onclick="errorMessage()">Identify your plant</button>
 				</form>
 				<span id="error-message" class="error-message"></span>
 			</section>
