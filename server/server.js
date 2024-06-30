@@ -1,21 +1,13 @@
-require('dotenv').config();
-
-//importing libraries
-//express is used to build web applications for Node.js
-//require is used to load modules
-const express = require('express');
-//multer is used to handle multipart/form-data and uploading files
-const multer = require('multer');
-//path is used to handle file paths
-const path = require('path');
-const fetch = require('node-fetch');
-const fs = require('fs');
-const FormData = require('form-data');
-const axios = require('axios');
-
+import 'dotenv/config';
+import express from 'express';
+import multer from 'multer';
+import fetch from 'node-fetch';
+import fs from 'fs';
+import path from 'path';
+//const FormData = require('form-data');
+import axios from 'axios';
 //creating an express application
-const app = require('./app');
-//which port number the express function will listen to
+const app = express()//which port number the express function will listen to
 const port = process.env.PORT || 3000;
 
 //makes it so that any file within public can be accessed via URL
