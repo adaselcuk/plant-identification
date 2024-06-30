@@ -1,17 +1,11 @@
 console.log('Script loaded');
 
-import express from 'express';
-
 document.getElementById('uploadLabel').addEventListener('click', function() {
 	document.getElementById('imageUpload').click();
 })
 
 document.getElementById('imageUpload').addEventListener('change', function() {
 	var fileName = this.files[0] ? this.files[0].name : "";
-
-	if (this.files.length > 0) {
-		console.log("File selected: " + fileName);
-	}
 
 	if (fileName) {
 		document.getElementById('uploadLabel').textContent = "File selected: " + fileName;
@@ -58,10 +52,28 @@ document.getElementById('imageUpload').addEventListener('change', function() {
 // 	}
 // });
 
+document.getElementById('uploadForm').addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevent the form from submitting in the traditional way
+	const isValid = validateFileSelection();
+
+	if (!isValid) {
+		return;
+	}
+
+	const formData = new FormData();
+	const fileInput = document.getElementById('imageUpload');
+    if (fileInput.files[0]) {
+        formData.append('image', fileInput.files[0]);
+        uploadFile(formData);
+    } else {
+        console.error('No file selected!'); // Handle case where no file is selected
+    }
+});
+
 
 // Function to upload file
 function uploadFile(formData) {
-    fetch('/upload', { // Assuming '/upload' is the endpoint
+    fetch('/upload', { // Send POST request to /upload endpoint
         method: 'POST',
         body: formData,
     })
@@ -74,11 +86,11 @@ function uploadFile(formData) {
     })
     .then(data => {
         console.log(data.message); // Success message
-        // Additional success handling here
+        displayResults(data.identification); 
     })
     .catch(error => {
         console.error(error.message); // Display error message
-        // Additional error handling here
+        document.getElementById('error-message').textContent = error.message;
     });
 }
 
@@ -93,21 +105,3 @@ function validateFileSelection() {
         return true; // Allow form submission if needed
     }
 }
-
-document.getElementById('uploadForm').addEventListener('submit', function(event) {
-    event.preventDefault(); // Prevent the form from submitting in the traditional way
-	const isValid = validateFileSelection();
-
-	if (!isValid) {
-		return;
-	}
-
-	const formData = new FormData();
-	const fileInput = document.getElementById('imageUpload');
-    if (fileInput.files[0]) {
-        formData.append('file', fileInput.files[0]);
-        uploadFile(formData);
-    } else {
-        console.error('No file selected!'); // Handle case where no file is selected
-    }
-});
