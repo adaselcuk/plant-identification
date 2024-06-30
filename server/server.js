@@ -8,38 +8,19 @@ const express = require('express');
 const multer = require('multer');
 //path is used to handle file paths
 const path = require('path');
+const fetch = require('node-fetch');
 const fs = require('fs');
 const FormData = require('form-data');
 const axios = require('axios');
 
 //creating an express application
-const app = express();
+const app = require('./app');
 //which port number the express function will listen to
 const port = process.env.PORT || 3000;
 
 //makes it so that any file within public can be accessed via URL
-app.use(express.static('public'));
+app.use(express.static(path.join(__dirname, '../public')));
 
-//function to send image to PLantNet API
-async function identifyPlant(imagePath) {
-	try {
-		const response = await axios.post('https://my.plantnet.org/v2/identify/all',{
-			api_key: process.env.PLANT_ID_API_KEY,
-			images: [fs.readFileSync(imagePath, {encoding: 'base64'})],
-			modifiers: ["similar_images"],
-			plant_language: "en",
-			plant_organs: ["flower", "leaf", "fruit", "bark", "habit", "other"],
-		}, {
-			headers: {
-				'Content-Type': 'application/json'
-			}
-		});
-		return response.data;
-	} catch (error) {
-		console.error('PlantNet API error:', error);
-		throw new Error('Failed to identify the plant. Please try again.');
-	}
-}
 
 //configure multer to use disk storage
 const storage = multer.diskStorage({
@@ -53,7 +34,7 @@ const storage = multer.diskStorage({
 //upload initialization
 const upload = multer({
 	storage: storage,
-	limits: {fileSize: 1000000},
+	limits: {fileSize: 52428800},
 	fileFilter: function(req, file, cb){
 			checkFileType(file, cb);
 		}
@@ -93,5 +74,36 @@ app.post('/upload', (req, res) => {
 		}
 	});
 });
+
+async function identifyPlant(imagePath) {
+	try {
+		const response = await axios.post('https://my.plantnet.org/v2/identify/all',{
+			api_key: process.env.PLANT_ID_API_KEY,
+			images: [fs.readFileSync(imagePath, {encoding: 'base64'})],
+			modifiers: ["similar_images"],
+			plant_language: "en",
+			plant_organs: ["flower", "leaf", "fruit", "bark", "habit", "other"],
+		}, {
+			headers: {
+				'Content-Type': 'application/json'
+			}
+		});
+		return response.data;
+	} catch (error) {
+		console.error('PlantNet API error:', error);
+		throw new Error('Failed to identify the plant. Please try again.');
+	}
+}
+
+function extractData(data) {
+	return data.results.map(result => ({
+		species: result.species.scientificNameWithoutAuthor,
+		commonNames: result.species.commonNames,
+		family: result.species.family.scientificName,
+		genus: result.species.genus.scientificName,
+		score: result.score,
+		images: result.images.map(image => image.url),
+	}));
+}
 
 app.listen(port, () => console.log(`Server running on port ${port}`));

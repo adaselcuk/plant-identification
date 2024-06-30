@@ -1,5 +1,8 @@
 console.log('Script loaded');
 
+const express = require('express');
+const app = express();
+
 document.getElementById('uploadLabel').addEventListener('click', function() {
 	document.getElementById('imageUpload').click();
 })
