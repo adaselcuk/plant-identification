@@ -62,11 +62,15 @@ app.post('/upload', (req, res) => {
 			}else {
 				try {
 					const identificationResults = await identifyPlant(req.file.path);
-					res.send({
-						message:'File uploaded!',
+					// creates array for results which can then be passed to display results:
+					const processedResults = extractData(identificationResults);
+
+					const result = {
+						message: 'File uploaded!',
 						file: `uploads/${req.file.filename}`,
-						identification: identificationResults
-				});
+						identification: processedResults
+					};
+					res.send(result);
 				} catch (identificationError) {
 					res.status(500).send({error: identificationError.message, details: identificationError});
 				}

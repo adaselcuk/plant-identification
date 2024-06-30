@@ -2,7 +2,7 @@
 
 var resultContainer = document.getElementById('result');
 
-function displayResults() {
+function displayResults(result) {
 
 	if (!resultContainer) {
 		console.error('Result container not found');
