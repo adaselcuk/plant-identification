@@ -16,8 +16,8 @@
 		<main>
 			<section>
 				<!--enctype multipart/form data allows image uploads-->
-				<form enctype="multipart/form-data" id="uploadForm" action="/uploads">
-					<input type="file" id="imageUpload" name="image" accept="image/*" style="visibility: hidden" required>
+				<form enctype="multipart/form-data" id="uploadForm" method="POST">
+					<input type="file" id="imageUpload" name="image" accept="image/*" required>
 					<label for="imageUpload" id="uploadLabel">Choose a file</label>
 					<br>
 					<button type="submit" id="submitFile">Identify your plant</button>
@@ -31,6 +31,5 @@
 			</section>
 		</main>
 		<script src="app.js"></script>
-		<script src="displayResults.js"></script>
 	</body>
 </html>

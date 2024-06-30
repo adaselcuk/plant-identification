@@ -103,7 +103,9 @@ form {
 	flex-direction: column;
 	align-items: center;
 }
-
+input[type="file"] {
+	display: none;
+}
 /*
 input[type="file"] {
 	margin: 20px 0;
