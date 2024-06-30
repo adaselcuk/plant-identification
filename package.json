@@ -3,7 +3,6 @@
   "description": "A simple plant identification app using the PlantNet API",
   "version": "1.0.0",
   "main": "server/server.js",
-  "type": "module",
   "scripts": {
     "start": "node server/server.js"
   },
