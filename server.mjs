@@ -23,7 +23,7 @@ async function identifyPlant(project, imageUrl) {
 
     url.searchParams.append('images', imageUrl);
     url.searchParams.append('organs', 'auto');
-    url.searchParams.append('include-related-images', 'false');
+    url.searchParams.append('include-related-images', 'true');
     url.searchParams.append('no-reject', 'false');
     url.searchParams.append('lang', 'en');
     url.searchParams.append('type', 'kt')

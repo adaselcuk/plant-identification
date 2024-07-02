@@ -47,12 +47,11 @@ function displayResults(data) {
 
     data.forEach(result => {
         const speciesInfo = `
-        <h2>Identification Results</h2>
-        <p>Scientific Name: ${result.species.scientificName}</p>
+        <h2>${result.species.scientificName}</h2>
         <p>Genus: ${result.species.genus}</p>
         <p>Family: ${result.species.family}</p>
         <p>Common Names: ${result.species.commonNames.join(', ')}</p>
-        <p>Score: ${result.score}</p>
+        <p>Confidence Score: ${(result.score * 100).toFixed(2)}%</p>
         <h3>Images</h3>
         ${result.images.map(image => `<img src="${image}" alt="species image" />`).join('')}
         <hr>
