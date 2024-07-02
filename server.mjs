@@ -23,7 +23,7 @@ async function identifyPlant(project, imageUrl) {
 
     url.searchParams.append('images', imageUrl);
     url.searchParams.append('organs', 'auto');
-    url.searchParams.append('include-related-images', 'true');
+    url.searchParams.append('include-related-images', 'false');
     url.searchParams.append('no-reject', 'false');
     url.searchParams.append('lang', 'en');
     url.searchParams.append('type', 'kt')
@@ -44,17 +44,25 @@ async function identifyPlant(project, imageUrl) {
         const data = await response.json();
         console.log('Success:', JSON.stringify(data, null, 2));
 
-        const results = data.results.map(result => ({
-            score: result.score,
-            species: {
-                scientificName: result.species.scientificName,
-                genus: result.species.genus.scientificName,
-                family: result.species.family.scientificName,
-                commonNames: result.species.commonNames
-            },
-            images: result.images.map(image => image.url.o)
-    }));
-    return results;
+        if (!Array.isArray(data.results)) {
+            console.error('data.results is not an array:', data);
+            return [];
+        }
+
+        const results = data.results.map(result => {
+            const images = Array.isArray(result.images) ? result.images.map(image => image.url.o) : [];
+            return {
+                score: result.score,
+                species: {
+                    scientificName: result.species.scientificName,
+                    genus: result.species.genus.scientificName,
+                    family: result.species.family.scientificName,
+                    commonNames: result.species.commonNames
+                },
+                images: images
+            };
+        });
+        return results;
     } catch (error) {
         console.error('Error:', error);
     }
