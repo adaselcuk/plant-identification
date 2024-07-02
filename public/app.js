@@ -4,10 +4,13 @@ function errorMessage() {
     var maxSize = 52428800;
     if (fileInput.files.length === 0) {
         error.textContent = 'No file uploaded!';
+        return false;
     } else if (fileInput.files[0].size > maxSize) {
         error.textContent = 'File size exceeds 50MB! PLease upload a smaller file!';
+        return false;
     } else {
         error.textContent = '';
+        return true;
     }
 }
 
@@ -18,17 +21,28 @@ document.getElementById('uploadForm').onsubmit = async function(event) {
     }
     
     const formData = new FormData();
+    const fileInput = document.getElementById('imageUpload');
+
+    if (fileInput.files.length > 0) {
+        formData.append('image', fileInput.files[0]);
+    }
+
     const response = await fetch('/uploads', {
         method: 'POST',
         body: formData
     });
+
+    if (!response.ok) {
+        console.error('Failed to upload image');
+        return;
+    }
 
     const data = await response.json();
     displayResults(data);
 };
 
 function displayResults(data) {
-    const resultsDiv = document.getElementById('results');
+    const resultsDiv = document.getElementById('result');
     resultsDiv.innerHTML = '';
 
     data.forEach(result => {

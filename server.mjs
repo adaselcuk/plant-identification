@@ -14,7 +14,7 @@ const app = express();
 const port = 3000;
 const upload = multer({ dest: 'uploads/' });
 
-app.use(express.static('public'));
+app.use(express.static(path.join(__dirname, 'public')));
 
 //GET request from PlantNet API
 async function identifyPlant(project, imageUrl) {
@@ -62,7 +62,7 @@ async function identifyPlant(project, imageUrl) {
 
 // using Imgur API
 async function uploadImage(imagePath) {
-    const clientId = process.env.IMGUR_CLIENT_ID;
+    const clientId = process.env.CLIENT_ID_IMGUR;
 
     try {
         const image = fs.readFileSync(imagePath, { encoding: 'base64'});
@@ -79,7 +79,7 @@ async function uploadImage(imagePath) {
         if (response.data && response.data.data && response.data.data.link) {
             return response.data.data.link;
         } else {
-            throw new Error('Failed to upload image');
+            throw new Error('Failed to get image link from Imgur');
         }
     } catch (error) {
         console.error('Error uploading image:', error);
@@ -89,7 +89,7 @@ async function uploadImage(imagePath) {
 
 
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'index.html'));
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
 app.post('/uploads', upload.single('image'), async (req, res) => {
