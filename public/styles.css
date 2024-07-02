@@ -188,3 +188,9 @@ h2 {
 	max-width: 100%;
 	padding: 20px;
 }
+
+#result img {
+	border-radius: 10px;
+	width: 200px;
+	margin: 10px;
+}

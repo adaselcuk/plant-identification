@@ -53,7 +53,10 @@ function displayResults(data) {
         <p>Common Names: ${result.species.commonNames.join(', ')}</p>
         <p>Confidence Score: ${(result.score * 100).toFixed(2)}%</p>
         <h3>Images</h3>
-        ${result.images.map(image => `<img src="${image}" alt="species image" />`).join('')}
+        ${result.images.slice(0, 2).map(image => {
+            console.log('Image URL:', image); // Log the image URLs
+            return `<img src="${image.url.o}" alt="species image" class="rounded" />`;
+        }).join('')}
         <hr>
         `;
         resultsDiv.innerHTML += speciesInfo;
