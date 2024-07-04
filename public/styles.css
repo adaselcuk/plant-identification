@@ -176,10 +176,12 @@ h2 {
 	font-family: 'AmigaTopaz', monospace;
 	font-size: 30px;
 	font-weight: 400;
+	text-align: center;
 }
 
 #result-section {
 	overflow: auto;
+	text-align: center;
 }
 
 #result {
@@ -187,10 +189,12 @@ h2 {
 	width: 100%;
 	max-width: 100%;
 	padding: 20px;
+	text-align: center;
 }
 
 #result img {
 	border-radius: 10px;
 	width: 200px;
 	margin: 10px;
+	display: inline-block;
 }
