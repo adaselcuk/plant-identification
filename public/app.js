@@ -55,7 +55,7 @@ function displayResults(data) {
         <h3>Images</h3>
         ${result.images.slice(0, 2).map(image => {
             console.log('Image URL:', image); // Log the image URLs
-            return `<img src="${image.url.o}" alt="species image" class="rounded" />`;
+            return `<img src="${image}" alt="species image" class="rounded" />`;
         }).join('')}
         <hr>
         `;
