@@ -14,6 +14,17 @@ function errorMessage() {
     }
 }
 
+document.getElementById('imageUpload').addEventListener('change', function() {
+    var fileInput = document.getElementById('imageUpload');
+    var label = document.getElementById('uploadLabel');
+
+    if (fileInput.files.length > 0) {
+        label.textContent = 'File selected: ' + fileInput.files[0].name;
+    } else {
+        label.textContent = 'Choose a file';
+    }
+});
+
 document.getElementById('uploadForm').onsubmit = async function(event) {
     event.preventDefault();
     if (!errorMessage()) {
