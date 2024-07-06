@@ -12,7 +12,25 @@ const __dirname = path.dirname(__filename);
 
 const app = express();
 const port = 3000;
-const upload = multer({ dest: 'uploads/' });
+
+const uploadDir = path.join(__dirname, 'uploads');
+
+if (!fs.existsSync(uploadDir)) {
+    fs.mkdirSync(uploadDir, { recursive: true });
+    console.log('Uploads directory created:', uploadDir);
+} else {
+    console.log('Uploads directory exists:', uploadDir);
+}
+
+fs.access(uploadDir, fs.constants.W_OK, (err) => {
+    if (err) {
+        console.error(`Uploads directory is not writable: ${err}`);
+    } else {
+        console.log('Uploads directory is writable');
+    }
+});
+
+const upload = multer({ dest: uploadDir });
 
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -64,7 +82,7 @@ async function identifyPlant(project, imageUrl) {
         });
         return results;
     } catch (error) {
-        console.error('Error time:', error);
+        console.error('Error identifying plants:', error);
     }
 }
 
@@ -74,6 +92,7 @@ async function uploadImage(imagePath) {
 
     try {
         const image = fs.readFileSync(imagePath, { encoding: 'base64'});
+        console.log('Uploading image to Imgur')
 
         const response = await axios.post('https://api.imgur.com/3/image', {
             image: image,
@@ -85,6 +104,7 @@ async function uploadImage(imagePath) {
         }); 
 
         if (response.data && response.data.data && response.data.data.link) {
+            console.log('Imgur API response:', response.data);
             return response.data.data.link;
         } else {
             throw new Error('Failed to get image link from Imgur');
@@ -104,14 +124,19 @@ app.post('/uploads', upload.single('image'), async (req, res) => {
     const project = 'all';
 
     const imagePath = req.file.path;
+    console.log('Image received:', imagePath)
 
     try {
         const imageUrl = await uploadImage(imagePath);
+        console.log('Image uploaded to Imgur:', imageUrl)
+
         const result = await identifyPlant(project, imageUrl);
+        console.log('Plant identified:', result)
 
         fs.unlinkSync(imagePath);
         res.json(result);
     } catch (error) {
+        console.log('Error in /uploads endpoint:', error);
         fs.unlinkSync(imagePath);
         res.status(500).send('Error identifying plant');
     }
