@@ -64,7 +64,7 @@ async function identifyPlant(project, imageUrl) {
         });
         return results;
     } catch (error) {
-        console.error('Error:', error);
+        console.error('Error time:', error);
     }
 }
 
