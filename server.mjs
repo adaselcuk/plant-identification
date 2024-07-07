@@ -13,24 +13,26 @@ const __dirname = path.dirname(__filename);
 const app = express();
 const port = process.env.PORT || 3000;
 
-const uploadDir = path.join(__dirname, 'uploads');
+const storage = multer.memoryStorage();
+const upload = multer({ storage: storage });
 
-if (!fs.existsSync(uploadDir)) {
-    fs.mkdirSync(uploadDir, { recursive: true });
-    console.log('Uploads directory created:', uploadDir);
-} else {
-    console.log('Uploads directory exists:', uploadDir);
-}
+// const uploadDir = path.join(__dirname, 'uploads');
 
-fs.access(uploadDir, fs.constants.W_OK, (err) => {
-    if (err) {
-        console.error(`Uploads directory is not writable: ${err}`);
-    } else {
-        console.log('Uploads directory is writable');
-    }
-});
+// if (!fs.existsSync(uploadDir)) {
+//     fs.mkdirSync(uploadDir, { recursive: true });
+//     console.log('Uploads directory created:', uploadDir);
+// } else {
+//     console.log('Uploads directory exists:', uploadDir);
+// }
 
-const upload = multer({ dest: uploadDir });
+// fs.access(uploadDir, fs.constants.W_OK, (err) => {
+//     if (err) {
+//         console.error(`Uploads directory is not writable: ${err}`);
+//     } else {
+//         console.log('Uploads directory is writable');
+//     }
+// });
+
 
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -87,15 +89,15 @@ async function identifyPlant(project, imageUrl) {
 }
 
 // using Imgur API
-async function uploadImage(imagePath) {
+async function uploadImage(buffer) {
     const clientId = process.env.CLIENT_ID_IMGUR;
 
     try {
-        const image = fs.readFileSync(imagePath, { encoding: 'base64'});
+        // const image = fs.readFileSync(imagePath, { encoding: 'base64'});
         console.log('Uploading image to Imgur')
 
         const response = await axios.post('https://api.imgur.com/3/image', {
-            image: image,
+            image: buffer.toString('base64'),
             type: 'base64'
         }, {
             headers: {
@@ -123,21 +125,21 @@ app.get('/', (req, res) => {
 app.post('/uploads', upload.single('image'), async (req, res) => {
     const project = 'all';
 
-    const imagePath = req.file.path;
-    console.log('Image received:', imagePath)
+    //const imagePath = req.file.path;
+    //console.log('Image received:', imagePath)
 
     try {
-        const imageUrl = await uploadImage(imagePath);
+        const imageUrl = await uploadImage(req.file.buffer);
         console.log('Image uploaded to Imgur:', imageUrl)
 
         const result = await identifyPlant(project, imageUrl);
         console.log('Plant identified:', result)
 
-        fs.unlinkSync(imagePath);
+        //fs.unlinkSync(imagePath);
         res.json(result);
     } catch (error) {
         console.log('Error in /uploads endpoint:', error);
-        fs.unlinkSync(imagePath);
+        //fs.unlinkSync(imagePath);
         res.status(500).send('Error identifying plant');
     }
 });
