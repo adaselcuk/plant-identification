@@ -9,6 +9,7 @@ While hiking or on a casual walk, I often find myself looking to identify common
 - Upload an image of a plant
 - Identify the plant using PlantNet API
 - View the result by the plant's species name, family, genus, image, and gain confidence of the result by the similarity score
+- Export results to a CSV file
 
 ## Building my First Website
 As a first experience to dive head-first into handling APIs was a learning curve that taught me a lot. The different methods of POST and GET caused me a lot of headaches but ultimately helped me improve my JavaScript and API experience. 
