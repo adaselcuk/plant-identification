@@ -50,6 +50,9 @@ document.getElementById('uploadForm').onsubmit = async function(event) {
 
     const data = await response.json();
     displayResults(data);
+    window.resultData = data;
+
+    document.getElementById('exportButton').style.display = 'block';
 };
 
 function displayResults(data) {
@@ -72,4 +75,35 @@ function displayResults(data) {
         `;
         resultsDiv.innerHTML += speciesInfo;
     });
+}
+
+function exportResults() {
+    if (!window.resultData) {
+        alert('No results to export!');
+        return;
+    }
+
+    const data = window.resultData;
+    let csvContent = 'data:text/csv;charset=utf-8,'; // Create CSV content
+    csvContent += 'Scientific Name,Genus,Family,Common Names,Confidence Score\n'; // headerssss
+
+    data.forEach(result => {
+        const row = [
+            result.species.scientificName,
+            result.species.genus,
+            result.species.family,
+            result.species.commonNames.join(', '),
+            (result.score * 100).toFixed(2) + '%'
+        ];
+        csvContent += row.join(',') + '\n';
+    });
+
+    const encodedUri = encodeURI(csvContent); // Encode CSV content
+    const link = document.createElement('a');
+    link.setAttribute('href', encodedUri);
+    link.setAttribute('download', 'results.csv');
+    document.body.appendChild(link);
+
+    link.click(); // Trigger download
+    document.body.removeChild(link);
 }
